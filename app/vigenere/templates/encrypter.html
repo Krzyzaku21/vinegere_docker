@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+<title>{% block title %}Crypted{% endblock title %}</title>
+{% block Pages %}
+<div
+    id="content
+"
+    class="d-flex justify-content-center"
+>
+    <div class="card o-hidden border-0 shadow-lg my-5 col-2">
+        <div class="card-body">
+            <div class="row">
+                <form action="{% url 'encrypter' %}" class="user" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group p-2">
+                        <input type="text" name="plain_text" class="form-control form-control-user" placeholder="słowo szyfrowane" />
+                    </div>
+                    <div class="form-group p-2">
+                        <input type="text" name="plain_key" class="form-control form-control-user" placeholder="klucz" />
+                    </div>
+                    <div class="p-2 d-flex justify-content-end">
+                        <input value="Wygeneruj hasło" type="submit" class="btn btn-warning"></input>
+                    </div>
+                        <div>
+                        {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-secondary">
+                                    <p class="text-center" style="font-size:15px; color:red; margin: auto;">{{ error|escape }}</placeholder>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <div class="alert alert-secondary">
+                                <p class="text-center" style="font-size:15px; color:red; margin: auto;">{{ error|escape }}</p>
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock Pages %}

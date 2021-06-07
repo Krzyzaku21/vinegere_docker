@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% load static %}{% block Pages2 %}
+<div
+    id="content
+"
+    class="d-flex justify-content-center"
+>
+    <div class="card o-hidden border-0 shadow-lg my-5 col-2">
+        <div class="card-body">
+            <div class="row p-2">
+                <div class="card p-2 col-6">
+                    text
+                    <p class="card-text">{{ scored.plain_text }}</p>
+                </div>
+                <div class="card p-2 col-6">
+                    Password
+                    <span id="pwd_spn" class="password-span">{{ scored.plain_key }}</span>
+                </div>
+                <div class="d-flex no-wrap justify-content-end p-2">
+                    <button id="cp_btn" type="button" class="btn btn-success m-2">Kopiuj</button>
+                    <a href="{% url 'decrypter' pk=scored.pk %}"<button type="button" class="btn btn-danger m-2">Wróć</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById("cp_btn").addEventListener("click", copy_password);
+
+    function copy_password() {
+        var copyText = document.getElementById("pwd_spn");
+        var textArea = document.createElement("textarea");
+        textArea.value = copyText.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("Copy");
+        textArea.remove();
+    }
+</script>
+{% endblock Pages2 %}
